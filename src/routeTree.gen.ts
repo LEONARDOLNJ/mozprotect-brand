@@ -10,13 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PainelRouteImport } from './routes/painel'
 import { Route as PesquisaRouteImport } from './routes/pesquisa'
 import { Route as ProteccaoRouteImport } from './routes/proteccao'
+import { Route as RegistarRouteImport } from './routes/registar'
 import { Route as VerificarRouteImport } from './routes/verificar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelRoute = PainelRouteImport.update({
+  id: '/painel',
+  path: '/painel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PesquisaRoute = PesquisaRouteImport.update({
@@ -29,6 +36,11 @@ const ProteccaoRoute = ProteccaoRouteImport.update({
   path: '/proteccao',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegistarRoute = RegistarRouteImport.update({
+  id: '/registar',
+  path: '/registar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerificarRoute = VerificarRouteImport.update({
   id: '/verificar',
   path: '/verificar',
@@ -37,35 +49,51 @@ const VerificarRoute = VerificarRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/painel': typeof PainelRoute
   '/pesquisa': typeof PesquisaRoute
   '/proteccao': typeof ProteccaoRoute
+  '/registar': typeof RegistarRoute
   '/verificar': typeof VerificarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/painel': typeof PainelRoute
   '/pesquisa': typeof PesquisaRoute
   '/proteccao': typeof ProteccaoRoute
+  '/registar': typeof RegistarRoute
   '/verificar': typeof VerificarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/painel': typeof PainelRoute
   '/pesquisa': typeof PesquisaRoute
   '/proteccao': typeof ProteccaoRoute
+  '/registar': typeof RegistarRoute
   '/verificar': typeof VerificarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pesquisa' | '/proteccao' | '/verificar'
+  fullPaths:
+    '/' | '/painel' | '/pesquisa' | '/proteccao' | '/registar' | '/verificar'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pesquisa' | '/proteccao' | '/verificar'
-  id: '__root__' | '/' | '/pesquisa' | '/proteccao' | '/verificar'
+  to: '/' | '/painel' | '/pesquisa' | '/proteccao' | '/registar' | '/verificar'
+  id:
+    | '__root__'
+    | '/'
+    | '/painel'
+    | '/pesquisa'
+    | '/proteccao'
+    | '/registar'
+    | '/verificar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PainelRoute: typeof PainelRoute
   PesquisaRoute: typeof PesquisaRoute
   ProteccaoRoute: typeof ProteccaoRoute
+  RegistarRoute: typeof RegistarRoute
   VerificarRoute: typeof VerificarRoute
 }
 
@@ -76,6 +104,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel': {
+      id: '/painel'
+      path: '/painel'
+      fullPath: '/painel'
+      preLoaderRoute: typeof PainelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pesquisa': {
@@ -92,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProteccaoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/registar': {
+      id: '/registar'
+      path: '/registar'
+      fullPath: '/registar'
+      preLoaderRoute: typeof RegistarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verificar': {
       id: '/verificar'
       path: '/verificar'
@@ -104,8 +146,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PainelRoute: PainelRoute,
   PesquisaRoute: PesquisaRoute,
   ProteccaoRoute: ProteccaoRoute,
+  RegistarRoute: RegistarRoute,
   VerificarRoute: VerificarRoute,
 }
 export const routeTree = rootRouteImport
