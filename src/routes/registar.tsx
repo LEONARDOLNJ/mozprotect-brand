@@ -139,10 +139,10 @@ function RegistarPage() {
     const app = createApplication({
       markType,
       markName: markName.trim() || "(marca figurativa)",
-      tagline: tagline.trim() || undefined,
+      ...(tagline.trim() ? { tagline: tagline.trim() } : {}),
       logoDataUrl,
-      logoDescription: logoDescription.trim() || undefined,
-      colourClaim: colourClaim.trim() || undefined,
+      ...(logoDescription.trim() ? { logoDescription: logoDescription.trim() } : {}),
+      ...(colourClaim.trim() ? { colourClaim: colourClaim.trim() } : {}),
       classes,
       applicantKind,
       applicantName: applicantName.trim(),
@@ -151,7 +151,7 @@ function RegistarPage() {
       phone: phone.trim(),
       province,
       address: address.trim(),
-      agent: agent.trim() || undefined,
+      ...(agent.trim() ? { agent: agent.trim() } : {}),
       fees: fees.total,
       paymentMethod,
     });
